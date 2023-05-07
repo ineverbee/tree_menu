@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load draw_menu %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<nav>
+    <a href="{% url 'home' 'clothes' %}"><h2>clothes</h2></a>
+    <a href="{% url 'home' 'shoes' %}"><h2>shoes</h2></a>
+</nav>
+{% if menuURL != "" %}
+    {% draw_menu menuURL as menuTree %}
+    <h1>{{ menuTree.0.root.name }}</h1>
+    {% for m in menuTree %}
+        <p style="margin-left: {{ m.level }}%;"><a href="{% url 'home' m.uri %}">{{ m.name }}</a></p>
+    {% endfor %}
+{% endif %}
+{% endblock %}
